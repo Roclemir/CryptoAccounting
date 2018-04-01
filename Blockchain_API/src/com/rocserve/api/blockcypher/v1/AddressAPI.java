@@ -26,8 +26,11 @@ public interface AddressAPI {
 	 *            String, boolean)
 	 * @return The same as in @see AddressAPI#getBalance(EBlockchains, String,
 	 *         String, boolean)
+	 * @throws MalformedURLException Thrown when a incorrect web or URI address is passed to the 
+	 * @throws IOException
+	 * @throws InvalidURIException
 	 */
-	public abstract double getBalance(String address, String apiToken)  throws MalformedURLException, IOException, InvalidURIException;
+	public abstract double getBalance(String address, String apiToken)  throws IOException;
 
 	/**
 	 * Returns the balance of the specified wallet on the specified chain with an
@@ -49,7 +52,7 @@ public interface AddressAPI {
 	 * @return Returns the balance of the wallet in JSON formatted string.
 	 */
 	public abstract double getBalance(String address, String apiToken,
-			boolean omitWalletAddresses)  throws MalformedURLException, IOException, InvalidURIException;
+			boolean omitWalletAddresses)  throws IOException;
 
 	/**
 	 * Gets general information about an address or named wallet. This function

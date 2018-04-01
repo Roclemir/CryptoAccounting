@@ -314,7 +314,7 @@ public abstract class AbsBlockchain
 	 */
 	@Override
 	public double getBalance(String address, String apiToken)
-			throws MalformedURLException, IOException, InvalidURIException {
+			throws IOException {
 		return getBalance(address, apiToken, true);
 	}
 
@@ -323,7 +323,7 @@ public abstract class AbsBlockchain
 	 */
 	@Override
 	public abstract double getBalance(String address, String apiToken, boolean omitWalletAddresses)
-			throws MalformedURLException, IOException, InvalidURIException;
+			throws IOException;
 
 	/**
 	 * {@inheritDoc}

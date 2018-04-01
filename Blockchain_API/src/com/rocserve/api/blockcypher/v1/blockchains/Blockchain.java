@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import org.json.simple.*;
 import org.json.simple.parser.*;
 
+import com.rocserve.api.blockcypher.exceptions.InvalidURIException;
 import com.rocserve.api.blockcypher.v1.EAvailableVersions;
 import com.rocserve.api.blockcypher.v1.EBlockchains;
 import com.rocserve.network.http.*;
@@ -282,7 +283,7 @@ public class Blockchain extends AbsBlockchain {
 	 */
 	@Override
 	public double getBalance(String address, String apiToken, boolean omitWalletAddresses)
-			throws MalformedURLException, IOException {
+			throws IOException {
 		// Prepare the URL.
 		String getBalanceURIExtension = "/addrs/" + address + "/balance";
 
@@ -301,8 +302,20 @@ public class Blockchain extends AbsBlockchain {
 			getBalanceURIExtension += "?omitWalletAddresses=false";
 
 		String url = BASE_URI + getBalanceURIExtension;
+		String response = null;
 
-		String response = HTMLRequests.HTMLGet(url);
+		try {
+			response = HTMLRequests.HTMLGet(url);
+		} catch (InvalidURIException iex) {
+			String message = "HTML GET request failed due to incorrect URI used, unable to retrieve balance."
+					+ "\nCheck the URI against the avialable URI's on Blockcypher's servers.\n"
+					+ "URI used: " + url.toString() + "\n";
+			throw new IOException(message, iex);
+		} catch (MalformedURLException mex) {
+			String message = "HTML Get request failed due to malformed URL (such as missing HTTP:// at the start), unable to retrieve balance.\n"
+					+ "URL used: " + url.toString();
+			throw new IOException(message, mex);
+		} 
 
 		JSONParser jParser = new JSONParser();
 		JSONObject jResponse = null;
