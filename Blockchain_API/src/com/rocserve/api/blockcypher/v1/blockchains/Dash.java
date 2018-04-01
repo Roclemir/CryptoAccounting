@@ -13,7 +13,6 @@ import java.math.BigInteger;
 
 import com.rocserve.api.blockcypher.v1.EBlockchains;
 import com.rocserve.api.blockcypher.v1.EAvailableVersions;
-import com.rocserve.network.http.HTMLRequests;
 
 /**
  * @author Ryan Couper

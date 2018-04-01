@@ -12,6 +12,8 @@ import java.net.URL;
  */
 public class InvalidURIException extends MalformedURLException {
 
+	private static final long serialVersionUID = -369698491442629910L;
+
 	/**
 	 * @param uri The java.net.URL that was used in the attempted connection.
 	 */
