@@ -9,14 +9,15 @@ import java.net.MalformedURLException;
  * @author Ryan Couper
  * @version 0.1
  * 
- * The AddressAPI interface allows interation with Blockcypher's Address API, allowing the user 
- * to retrieve various information pertaining to an address.
+ *          The AddressAPI interface allows interaction with Blockcypher's
+ *          Address API, allowing the user to retrieve various information
+ *          pertaining to an address.
  */
 public interface AddressAPI {
 	/**
-	 * Returns the balance of the specified wallet or address.
-	 * This is a wrapper method for {@link AddressAPI#getBalance(String, String, boolean)}, setting the final parameter
-	 * to true for a more efficient response.
+	 * Returns the balance of the specified wallet or address. This is a wrapper
+	 * method for {@link AddressAPI#getBalance(String, String, boolean)}, setting
+	 * the final parameter to false for a verbose output.
 	 * 
 	 * @param address
 	 *            The same as in @see AddressAPI#getBalance(EBlockchains, String,
@@ -26,11 +27,11 @@ public interface AddressAPI {
 	 *            String, boolean)
 	 * @return The same as in @see AddressAPI#getBalance(EBlockchains, String,
 	 *         String, boolean)
-	 * @throws MalformedURLException Thrown when a incorrect web or URI address is passed to the 
 	 * @throws IOException
-	 * @throws InvalidURIException
+	 *             Thrown when there is an issue with the URI, such as a malformed
+	 *             URI or if the URI is not found.
 	 */
-	public abstract double getBalance(String address, String apiToken)  throws IOException;
+	public abstract double getBalance(String address, String apiToken) throws IOException;
 
 	/**
 	 * Returns the balance of the specified wallet on the specified chain with an
@@ -50,9 +51,11 @@ public interface AddressAPI {
 	 *            string. This can save time/bandwidth when using a large number of
 	 *            addresses associated with named wallets and HD wallets
 	 * @return Returns the balance of the wallet in JSON formatted string.
+	 * @throws IOException
+	 *             Thrown when there is an issue with the URI, such as a malformed
+	 *             URI or if the URI is not found.
 	 */
-	public abstract double getBalance(String address, String apiToken,
-			boolean omitWalletAddresses)  throws IOException;
+	public abstract double getBalance(String address, String apiToken, boolean omitWalletAddresses) throws IOException;
 
 	/**
 	 * Gets general information about an address or named wallet. This function
@@ -71,11 +74,11 @@ public interface AddressAPI {
 	 *         given address or named wallet.
 	 */
 	public abstract String getAddressInformation(String address, String apiToken);
-	// Note: there are many possible alternatives to this method, the commented out 
+	// Note: there are many possible alternatives to this method, the commented out
 	// overloaded getAddressInformation below.
-	
+
 	/**
-	 * Provides extensive information pertaining to a specific address or named 
+	 * Provides extensive information pertaining to a specific address or named
 	 * wallet.
 	 * 
 	 * @param address
@@ -90,15 +93,21 @@ public interface AddressAPI {
 	 *         given address or named wallet.
 	 */
 	public abstract String getFullAddressInformation(String address, String apiToken);
-	// Note: there are many possible alternatives to this method, the commented out 
+	// Note: there are many possible alternatives to this method, the commented out
 	// overloaded getFullddressInformation below.
-	
-	// The below methods are earmarked for future development. See 
+
+	// The below methods are earmarked for future development. See
 	// the relevant sections of
-	// https://www.blockcypher.com/dev/dash/ 
+	// https://www.blockcypher.com/dev/dash/
 	// for more information.
-	// public abstract String generateAddress(); 
+	// public abstract String generateAddress();
 	// public abstract generateMultisigAddress(String jsonAddressKeychain);
-	// public abstract String getAddressInformation(EBlockchains chainName, String address, String apiToken, boolean unspentOnly, boolean includeScript, boolean includeConfidence, int before, int after, int limit, int confirmations, int confidence, boolean omitWalletAddresses);
-	// public abstract String getFullAddressInformation(EBlockchains chainName, String address, String apiToken, int before, int after, int limit, int txlimit, int confirmations, int confidence, boolean includeHex, boolean includeConfidence, boolean omitWalletAddresses);
+	// public abstract String getAddressInformation(EBlockchains chainName, String
+	// address, String apiToken, boolean unspentOnly, boolean includeScript, boolean
+	// includeConfidence, int before, int after, int limit, int confirmations, int
+	// confidence, boolean omitWalletAddresses);
+	// public abstract String getFullAddressInformation(EBlockchains chainName,
+	// String address, String apiToken, int before, int after, int limit, int
+	// txlimit, int confirmations, int confidence, boolean includeHex, boolean
+	// includeConfidence, boolean omitWalletAddresses);
 }

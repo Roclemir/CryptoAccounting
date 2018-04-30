@@ -3,6 +3,8 @@
  */
 package com.rocserve.api.blockcypher.v1.blockchains;
 
+import java.io.IOException;
+
 /***********************************************
  *  THIS FILE HAS BEEN ABANDONED IN FAVOUR     *
  *     OF MAKING A MORE GENERIC VERSION        *
@@ -12,19 +14,18 @@ package com.rocserve.api.blockcypher.v1.blockchains;
 import java.math.BigInteger;
 
 import com.rocserve.api.blockcypher.v1.EBlockchains;
+
 import com.rocserve.api.blockcypher.v1.EAvailableVersions;
 
 /**
+ * 
  * @author Ryan Couper
- *
+ * @deprecated
  */
 public class Dash extends AbsBlockchain {
 	
 	public static final String DASH_URI_EXTENSION = "/dash/main";
 
-	/**
-	 * @param chainType
-	 */
 	public Dash() throws IllegalArgumentException {
 		super(EBlockchains.DASH, EAvailableVersions.V1);
 		// TODO Auto-generated constructor stub
@@ -113,14 +114,14 @@ public class Dash extends AbsBlockchain {
 		return false;
 	}
 
-////////////////// END METADATA FUCNTIONS ///////////////////
+///////////////////// END METADATA METHODS //////////////////
 ////////////////// GENERAL INFORMATION METHODS //////////////
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getGeneralInformation() {
+	public String getChainInfo() throws IOException {
 		// TODO Auto-generated method stub
 		return null;
 	}

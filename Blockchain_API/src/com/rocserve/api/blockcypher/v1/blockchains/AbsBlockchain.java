@@ -5,9 +5,7 @@ package com.rocserve.api.blockcypher.v1.blockchains;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.MalformedURLException;
 
-import com.rocserve.api.blockcypher.exceptions.InvalidURIException;
 import com.rocserve.api.blockcypher.v1.AddressAPI;
 import com.rocserve.api.blockcypher.v1.AssetAPI;
 import com.rocserve.api.blockcypher.v1.BlockchainAPI;
@@ -15,6 +13,7 @@ import com.rocserve.api.blockcypher.v1.EAvailableVersions;
 import com.rocserve.api.blockcypher.v1.MetadataAPI;
 import com.rocserve.api.blockcypher.v1.TransactionAPI;
 import com.rocserve.api.blockcypher.v1.WalletAPI;
+
 import com.rocserve.api.blockcypher.v1.EBlockchains;
 
 /**
@@ -28,6 +27,7 @@ public abstract class AbsBlockchain
 	public final EAvailableVersions API_VERSION;
 	public static final String BLOCKCYPHER_V1_URI = "https://api.blockcypher.com/v1";
 	protected final String BASE_URI;
+	public final double SMALLEST_UNIT;
 
 	/**
 	 * Sets up the initial blockchain by taking a chain type from
@@ -72,21 +72,27 @@ public abstract class AbsBlockchain
 		switch (CHAIN_TYPE) {
 		case DASH:
 			BASE_URI = baseURIPrefix + "/dash/main";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		case BITCOIN:
 			BASE_URI = baseURIPrefix + "/btc/main";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		case BITCOIN_TEST:
 			BASE_URI = baseURIPrefix + "/btc/test3";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		case DOGECOIN:
 			BASE_URI = baseURIPrefix + "/doge/main";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		case LITECOIN:
 			BASE_URI = baseURIPrefix + "/ltc/main";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		case BLOCKCYPHER_TEST:
 			BASE_URI = baseURIPrefix + "/bcy/test";
+			SMALLEST_UNIT = 1 * Math.pow(10, -8);
 			break;
 		default:
 			throw new IllegalArgumentException(
@@ -99,13 +105,13 @@ public abstract class AbsBlockchain
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract String getTXInfo(String hashOfTransaction);
+	public abstract String getTXInfo(String hashOfTransaction) throws IOException;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract String getUnconfirmedTXInfo();
+	public abstract String getUnconfirmedTXInfo() throws IOException;
 
 	/**
 	 * {@inheritDoc}
@@ -215,7 +221,7 @@ public abstract class AbsBlockchain
 	 * {@inheritDoc}
 	 */
 	@Override
-	public abstract String getGeneralInformation();
+	public abstract String getChainInfo() throws IOException;
 
 	/**
 	 * {@inheritDoc}
@@ -315,7 +321,7 @@ public abstract class AbsBlockchain
 	@Override
 	public double getBalance(String address, String apiToken)
 			throws IOException {
-		return getBalance(address, apiToken, true);
+		return getBalance(address, apiToken, false);
 	}
 
 	/**

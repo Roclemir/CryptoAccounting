@@ -1,11 +1,14 @@
 package com.rocserve.api.blockcypher.v1;
 
+import java.io.IOException;
+
 /**
  * 
  * @author Ryan Couper
  * @version 0.1
  * 
- * The TransactionAPI sets a standard set of functions for messing around with transactions within a blockchain. 
+ *          The TransactionAPI sets a standard set of functions for messing
+ *          around with transactions within a blockchain.
  */
 public interface TransactionAPI {
 	/**
@@ -18,16 +21,24 @@ public interface TransactionAPI {
 	 *            obtained.
 	 * @return A JSON formated string holding information about the specified
 	 *         transaction.
+	 * @throws IOException
+	 *             Thrown when there is an issue with the URI, such as a malformed
+	 *             URI or if the URI is not found. An error message is produced and
+	 *             propagated the thrown exception.
 	 */
-	public abstract String getTXInfo(String hashOfTransaction);
+	public abstract String getTXInfo(String hashOfTransaction) throws IOException;
 
 	/**
 	 * This method returns information regarding unconfirmed transactions on the
 	 * blockchain that are not yet part of any block.
 	 * 
 	 * @return The JSON formated information about the unconfirmed transactions.
+	 * @throws IOException
+	 *             Thrown when there is an issue with the URI, such as a malformed
+	 *             URI or if the URI is not found. An error message is produced and
+	 *             propagated the thrown exception.
 	 */
-	public abstract String getUnconfirmedTXInfo();
+	public abstract String getUnconfirmedTXInfo() throws IOException;
 
 	// public abstract String createTX(String jsonTXrequest, boolean
 	// includeToSignTx); Earmarked for future development (See

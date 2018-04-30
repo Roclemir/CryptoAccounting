@@ -174,7 +174,7 @@ public interface MetadataAPI {
 	 * {@link MetadataAPI#setTXMeta(String, String, String, boolean)} providing TRUE
 	 * as the isPrivate parameter.
 	 * 
-	 * @param txhash
+	 * @param txHash
 	 *            The hash of the transaction to store the metadata on.
 	 * @param apiToken
 	 *            This is an API apiToken that has been previously retrieved for

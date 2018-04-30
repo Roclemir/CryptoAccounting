@@ -1,5 +1,6 @@
 package com.rocserve.api.blockcypher.v1;
 
+import java.io.IOException;
 import java.math.BigInteger;
 
 /**
@@ -7,8 +8,8 @@ import java.math.BigInteger;
  * @author Ryan Couper
  * @version 0.1
  * 
- * This interface provides a standardised way of accessing general information
- * about the blockchain.
+ *          This interface provides a standardised way of accessing general
+ *          information about the blockchain.
  */
 public interface BlockchainAPI {
 	/**
@@ -16,8 +17,11 @@ public interface BlockchainAPI {
 	 * 
 	 * @return A JSON formatted string containing general information about the
 	 *         requested blockchain.
+	 * @throws IOException
+	 *             Thrown when the URI is malformed or inaccurate in some way. See
+	 *             error message thrown for more details.
 	 */
-	public abstract String getGeneralInformation();
+	public abstract String getChainInfo() throws IOException;
 
 	/**
 	 * Provides general information about a given block on a given blockchain.

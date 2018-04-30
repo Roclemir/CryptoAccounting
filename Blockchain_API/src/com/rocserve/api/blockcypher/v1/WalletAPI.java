@@ -11,11 +11,10 @@ package com.rocserve.api.blockcypher.v1;
  *          The best way to think about it is, if a user has five different
  *          Bitcoin addresses that all hold 0.01 btc each, then they could
  *          create a named wallet that contains all five addresses in it, so
- *          when they call the
- *          {@link AddressAPI#getBalance(Blockchains, String, String)} method,
- *          they just need to pass in the name of the wallet as the "address"
- *          parameter and they will get the combined balance of all the
- *          addresses.
+ *          when they call the {@link AddressAPI#getBalance(String, String)}
+ *          method, they just need to pass in the name of the wallet as the
+ *          "address" parameter and they will get the combined balance of all
+ *          the addresses.
  */
 public interface WalletAPI {
 	/**
@@ -42,7 +41,8 @@ public interface WalletAPI {
 	 *            can be added later with the
 	 *            {@link WalletAPI#addAddressesToWallet(String, String, String[], boolean)}
 	 *            method, or removed with the
-	 *            {@link WalletAPI#removeAddress(String, String, String)} method.
+	 *            {@link WalletAPI#removeAddressesFromWallet(String, String, String[])} method.
+	 *  
 	 * @return If successful, A JSON formatted string containing information about
 	 *         the newly created wallet. If unsuccessful, a string containing
 	 *         information to potentially ascertain as to why the call failed.
@@ -169,7 +169,7 @@ public interface WalletAPI {
 	 *            https://accounts.blockcypher.com/apiTokens
 	 * @return A JSON formatted string containing the addresses. In the case of the
 	 *         standard wallet, this will return "addresses" as the key, and an
-	 *         array of addresses as the value. An example for the reponse for a
+	 *         array of addresses as the value. An example for the response for a
 	 *         standard wallet is:
 	 * 
 	 *         <pre>
@@ -179,13 +179,7 @@ public interface WalletAPI {
 	 *         		"XJcX75oraJEmzXXHpDjRctw3BX6qDmFM8e" 
 	 *         		]
 	 *         }
-	 *         }
-	 *         </pre>
-	 * 
-	 *         An example for a HD wallet response is:
-	 * 
-	 * 
-	 * 
+	 *         }</pre>
 	 */
 	public abstract String getWalletAddresses(String name, String apiToken);
 
@@ -205,7 +199,7 @@ public interface WalletAPI {
 	 *         address as the value (this level also has a sibling key-value pair
 	 *         which is "path" for the key, and the actual path for the value). See
 	 *         {@link WalletAPI#getHDWalletAddresses(String, boolean, String, boolean)}
-	 *         for an example of the reponse.
+	 *         for an example of the response.
 	 */
 	public abstract String getHDWalletAddresses(String name, String apiToken);
 
